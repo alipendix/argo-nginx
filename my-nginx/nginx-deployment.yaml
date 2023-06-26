@@ -1,28 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-app
+  name: nginx-deployment
   labels:
-    app: nginx-app
+    app: web
 spec:
-  replicas: 2
   selector:
     matchLabels:
-      app: nginx-app
+      app: web
+  replicas: 5
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: nginx-app
+        app: web
     spec:
       containers:
-      - name: nginx-app
-        image: nginx:latest
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "1024Mi"
-            cpu: "500m"
+       —name: nginx
+          image: nginx
+          ports:
+           —containerPort: 80
